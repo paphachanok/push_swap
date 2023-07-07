@@ -182,7 +182,7 @@ void	push_swap(t_circularList *a, t_circularList *b)
 	tiny_sort_3(a);
 	
 
-	// ❹  : push back to stack A
+	// ❹  : Push all nodes back to stack A
 	set_target_node_b(a, b);
 	move_into_a(a, b);
 	
@@ -195,15 +195,22 @@ void	push_swap(t_circularList *a, t_circularList *b)
 
 ❷  Push nodes into stack B based on its cost until stack size == 3.
 
-    First, I'll set the target node of every node in stack A. The condition is the target node must be smaller than node a and it must be the clostest smallest one. 
+    First, I'll set the target node for every node in stack A. The condition is the target node must be smaller than node a and it must be the clostest smallest one. 
     
     Second, calculate the price (how many moves both node A and target node to get the the toppest node). Compare all node in stack A then, keep the address of the chaepest node in a->the_cheapest_node
     
-    Third, do the rotation. If the node index <= median, then do ra(a). If not, then do rra(a). 
+    Third, do the rotation to make node_a and its target_node_b to be at the top. If the node index <= median, then do ra(a). If not, then do rra(a). 
+    Forth, do pb(a, b) (move node_a to stack B)
 
 ❸ Sort last three elements
 
-❹ 
+❹ Push all nodes back to stack A
+
+	This time I'll set the target node for every node in stack B. The condition is the target_node_a must be bigger than node_b and it must be the clostest bigger one. 
+ 
+ 	Second, do the rotation to make node_b and its target_node_a to be at the top. If the node index <= median, then do rb(b). If not, then do rrb(b).
+  
+  	Third, do pa(a, b) (move node_b to stack A)
 
 
 ## Installation
