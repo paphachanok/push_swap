@@ -205,12 +205,12 @@ void	push_swap(t_circularList *a, t_circularList *b)
 ❸ Sort last three elements
 
 ❹ Push all nodes back to stack A
-
-	This time I'll set the target node for every node in stack B. The condition is the target_node_a must be bigger than node_b and it must be the clostest bigger one. 
+	
+   This time I'll set the target node for every node in stack B. The condition is the target_node_a must be bigger than node_b and it must be the clostest bigger one. 
  
- 	Second, do the rotation to make node_b and its target_node_a to be at the top. If the node index <= median, then do rb(b). If not, then do rrb(b).
+    Second, do the rotation to make node_b and its target_node_a to be at the top. If the node index <= median, then do rb(b). If not, then do rrb(b).
   
-  	Third, do pa(a, b) (move node_b to stack A)
+    Third, do pa(a, b) (move node_b to stack A)
 
 
 ## Installation
