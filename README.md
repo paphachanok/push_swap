@@ -1,4 +1,8 @@
 # Push Swap Project
+╱|、 <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (˚ˎ 。7  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |、˜〵          
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; じしˍ,)ノ
 
 ## Table of Contents
 
@@ -6,10 +10,6 @@
 - [Project Description](#project-description)
 - [Sorting Algorithms](#sorting-algorithms)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Example](#example)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -44,13 +44,166 @@ following operations at your disposal:
   10. **rrb** (reverse rotate b): Shift down all elements of stack b by 1. The last element becomes the first one.
   11. **rrr** : rra and rrb at the same time.
 
+## Data Structure
+As the mandatory of Push Swap project, I use **stack** then, implement its structure with **Linked List**.
+
+  1.  **Stack**
+      A linear data structure that accompanies a principle known as FILO (First In Last Out).
+      FILO implies that the element that is inserted first, comes out last.
+
+      https://cdn.buttercms.com/PuR6MmOQQdqAP6xfh6JO
+
+  2.  **Doubly Linked List**
+     A doubly linked list (DLL) is a special type of linked list in which each node contains a pointer to the previous node as well as the next node of the linked list.
+
+      https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2014/03/DLL1.png
+
+My node structure is maintained as follow,
+
+```
+typedef struct s_CLnode
+{
+	int		value;
+	int		index;
+	int		price;
+	struct s_CLnode	*target_node;
+	struct s_CLnode	*prev;
+	struct s_CLnode	*next;
+}	t_CLnode;
+```
+A node structure has been implemented for organizing data of: 
+
+1.  **value** : Value of number this node contains.
+2.  **index** : The order number this node in the stack. (the first element has index of 1)
+3.  **price** : How many moves to go to the top of stack.
+4.  **target node** :
+    In every nodes node of stack A, target node data will contains the address of the smaller node in stack B, but it must be the closest smallest one. Using this method, the bigger node will be ordered on top of the smaller node in stack B.
+  In every nodes node of stack B, target node data will contains the address of the biiger node in stack A, but it must be the closest bigger one. Using this method, the smaller node will be ordered on top of the bigger node in stack A.
+5.  **prev** : pointer (address) to the next node. (prev of the first node will point to NULL)
+6.  **next** : pointer (address) to the previos node. (next of the last node will pint to NULL)
+
+```
+typedef struct s_circularList
+{
+	int		size;
+	t_CLnode	*top;
+	t_CLnode	*find_last_node;
+	t_CLnode	*lowest_price_node;
+	t_CLnode	*the_smallest_node;
+	t_CLnode	*the_cheapest_node;
+}	t_circularList;
+```
+A stack structure has been implemented for organizing data of: 
+1.  **size** : How many number of nodes in the stack.
+2.  **top** : pointer (address) to the toppest node in the stack.
+3.  **find_last_node** : pointer (address) to the bottom node in the stack.
+4.  **the_smallest_node** : a pointer (address) to the stack's smallest node. (To lessen a possible increase in complexity in the final_arrangement function)
+5.  **the_cheapest_node** : a pointer (address) to the stack's cheapest node. (Comparing each node to determine which one moves the least.)
+
 ## Sorting Algorithms
 
-To solve the Push Swap problem, my project implements the following sorting algorithms:
+After handling user input error (empty string, string with space, duplicate number, input with many argument, input that is bigger than INT_MAX, input smaller than INT_MIN, etc), then push every element in stack A. I will classify the method to solve by the number of elements in stack A.
 
-1. **Turk Sort**: This modified version is inspired by the [Turk Sort article](https://medium.com/@ayogun/push-swap-c1f5d2d41e97) by Ayooluwa Ogundahunsi.
+```
+if (!stack_sorted(&a))  // if the stack has not been sorted.
+{
+  if (a.size == 2)      // if size == 2, then swap the 2 elements.
+    sa(&a);              
+  else if (a.size == 3) // 🅐 if size == 3
+    tiny_sort_3(&a);
+  else if (a.size == 5) // 🅑 if size == 5
+    tiny_sort_5(&a, &b);
+  else                  //  🅒 if size > 3
+    push_swap(&a, &b);
+}
+```
 
-    This algorithm has the reference from **Mechanical Turk** which is hard coded and but efficiet.
+🅐  To solve the problem which size == 3, my project implements the following sorting algorithms:
+```
+void	tiny_sort_3(t_circularList *a)
+{
+	int	biggest;
+
+	biggest = find_biggest(a);
+	if (a->top->value == biggest)
+		ra(a);
+	else if (a->top->next->value == biggest)
+		rra(a);
+	if (a->top->value > a->top->next->value)
+		sa(a);
+}
+```
+I'll make sure that the largest node is at the bottom, then verify that the first two nodes are in the correct order before swapping. The maximum number of moves that can be made using this approach is 2.
+
+🅑  To solve the problem which size == 5, my project implements the following sorting algorithms:
+
+```
+void	tiny_sort_5(t_circularList *a, t_circularList *b)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < 2)
+	{
+		find_smallest_node(a);
+		pass_to_b(a, b);
+	}
+	tiny_sort_3(a);
+	pa(a, b);
+	pa(a, b);
+}
+```
+I'll pick the smallest node in stack A and push to stack B. I'll do this process for 2 times so, the smallest will be at the bottom of stack B. Then, I'll do tiny_sort_3 to stack A. Then push back 2 element in stack B in order.
+
+
+ 🅒  To solve the problem which size > 3, my project implements the following sorting algorithms:
+ 
+### Turk Sort: 
+This modified version is inspired by the [Turk Sort article](https://medium.com/@ayogun/push-swap-c1f5d2d41e97) by Ayooluwa Ogundahunsi.
+
+This algorithm has the reference from **Mechanical Turk** which is hard coded and but efficiet.
+The main algoritm is implemented as follow :
+
+```
+void	push_swap(t_circularList *a, t_circularList *b)
+{
+	// ❶ : Push 2 nodes into stack B.
+	pb(a, b);
+	pb(a, b);
+
+        // ❷ : Push nodes into stack B based on its cost until stack size == 3.
+	while (a->size > 3)
+	{
+		set_target_node_a(a, b);
+		set_price(a, b);
+		move_into_b(a, b);
+	}
+	// ❸ : Sort last three elements
+	tiny_sort_3(a);
+	
+
+	// ❹  : push back to stack A
+	set_target_node_b(a, b);
+	move_into_a(a, b);
+	
+
+	//! sprint5 : final arrangement
+	final_arrangement(a);
+}
+```
+❶ Push 2 nodes into stack B
+
+❷  Push nodes into stack B based on its cost until stack size == 3.
+
+    First, I'll set the target node of every node in stack A. The condition is the target node must be smaller than node a and it must be the clostest smallest one. 
+    
+    Second, calculate the price (how many moves both node A and target node to get the the toppest node). Compare all node in stack A then, keep the address of the chaepest node in a->the_cheapest_node
+    
+    Third, do the rotation. If the node index <= median, then do ra(a). If not, then do rra(a). 
+
+❸ Sort last three elements
+
+❹ 
 
 
 ## Installation
