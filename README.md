@@ -4,6 +4,8 @@
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |、˜〵          
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; じしˍ,)ノ
 
+<br /> <br />
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -11,17 +13,27 @@
 - [Sorting Algorithms](#sorting-algorithms)
 - [Installation](#installation)
 
+<br /> <br />
+
 ## Introduction
 
-Welcome to the Push Swap project! This project involves sorting data on a stack using a limited set of instructions, with the goal of achieving the smallest number of moves. The main objective is to manipulate various sorting algorithms and select the most appropriate solution(s) for optimized data sorting.
+Welcome to the Push Swap project! This project involves sorting data on a stack using a limited set of instructions, with the goal of achieving the smallest number of moves. 
+<br /> <br />
+The main objective is to manipulate various sorting algorithms and select the most appropriate solution(s) for optimized data sorting.
 
 This README file provides an overview of the project, installation instructions, details about the sorting algorithms used, and guidelines for usage.
 
+<br /> <br />
+
 ## Project Description
 
-The Push Swap project focuses on sorting data using two stacks, named Stack A and Stack B. Initially, Stack A contains a random list of integers, and Stack B is empty. The task is to sort the integers in Stack A in ascending order using a predefined set of instructions.
+The Push Swap project focuses on sorting data using two stacks, named Stack A and Stack B. 
+<br /> <br />
+Initially, Stack A contains a random list of integers, and Stack B is empty. The task is to sort the integers in Stack A in ascending order using a predefined set of instructions.
 
 The challenge lies in finding an optimal sequence of instructions that will efficiently sort the integers with the least number of moves.
+
+<br /> <br />
 
 ### The Rules
 -  You have 2 **stacks** named a and b.
@@ -32,17 +44,19 @@ The challenge lies in finding an optimal sequence of instructions that will effi
 
 -  The goal is to sort in ascending order numbers into stack a. To do so you have the
 following operations at your disposal:
-  1. **sa** (swap a): Swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements.
-  2. **sb** (swap b): Swap the first 2 elements at the top of stack b. Do nothing if there is only one or no elements.
-  3. **ss** : sa and sb at the same time.
-  4. **pa** (push a): Take the first element at the top of b and put it at the top of a. Do nothing if b is empty.
-  5. **pb** (push b): Take the first element at the top of a and put it at the top of b. Do nothing if a is empty.
-  6. **ra** (rotate a): Shift up all elements of stack a by 1. The first element becomes the last one.
-  7. **rb** (rotate b): Shift up all elements of stack b by 1. The first element becomes the last one.
-  8. **rr** : ra and rb at the same time
-  9. **rra** (reverse rotate a): Shift down all elements of stack a by 1. The last element becomes the first one.
-  10. **rrb** (reverse rotate b): Shift down all elements of stack b by 1. The last element becomes the first one.
-  11. **rrr** : rra and rrb at the same time.
+  1. **sa** (swap a): Swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements. <br /> <br />
+  2. **sb** (swap b): Swap the first 2 elements at the top of stack b. Do nothing if there is only one or no elements. <br /> <br />
+  3. **ss** : sa and sb at the same time. <br /> <br />
+  4. **pa** (push a): Take the first element at the top of b and put it at the top of a. Do nothing if b is empty. <br /> <br />
+  5. **pb** (push b): Take the first element at the top of a and put it at the top of b. Do nothing if a is empty. <br /> <br />
+  6. **ra** (rotate a): Shift up all elements of stack a by 1. The first element becomes the last one. <br /> <br />
+  7. **rb** (rotate b): Shift up all elements of stack b by 1. The first element becomes the last one. <br /> <br />
+  8. **rr** : ra and rb at the same time <br /> <br />
+  9. **rra** (reverse rotate a): Shift down all elements of stack a by 1. The last element becomes the first one. <br /> <br />
+  10. **rrb** (reverse rotate b): Shift down all elements of stack b by 1. The last element becomes the first one. <br /> <br />
+  11. **rrr** : rra and rrb at the same time. 
+
+<br /> <br />
 
 ## Data Structure
 As the mandatory of Push Swap project, I use **stack** then, implement its structure with **Linked List**.
@@ -73,14 +87,16 @@ typedef struct s_CLnode
 ```
 A node structure has been implemented for organizing data of: 
 
-1.  **value** : Value of number this node contains.
-2.  **index** : The order number this node in the stack. (the first element has index of 1)
-3.  **price** : How many moves to go to the top of stack.
+1.  **value** : Value of number this node contains. <br /> <br />
+2.  **index** : The order number this node in the stack. (the first element has index of 1) <br /> <br />
+3.  **price** : How many moves to go to the top of stack. <br /> <br />
 4.  **target node** :
     In every nodes node of stack A, target node data will contains the address of the smaller node in stack B, but it must be the closest smallest one. Using this method, the bigger node will be ordered on top of the smaller node in stack B.
+    <br /> <br />
   In every nodes node of stack B, target node data will contains the address of the biiger node in stack A, but it must be the closest bigger one. Using this method, the smaller node will be ordered on top of the bigger node in stack A.
-5.  **prev** : pointer (address) to the next node. (prev of the first node will point to NULL)
-6.  **next** : pointer (address) to the previos node. (next of the last node will pint to NULL)
+<br /> <br />
+6.  **prev** : pointer (address) to the next node. (prev of the first node will point to NULL) <br /> <br />
+7.  **next** : pointer (address) to the previos node. (next of the last node will pint to NULL) <br /> <br />
 
 ```
 typedef struct s_circularList
@@ -94,15 +110,20 @@ typedef struct s_circularList
 }	t_circularList;
 ```
 A stack structure has been implemented for organizing data of: 
-1.  **size** : How many number of nodes in the stack.
-2.  **top** : pointer (address) to the toppest node in the stack.
-3.  **find_last_node** : pointer (address) to the bottom node in the stack.
-4.  **the_smallest_node** : a pointer (address) to the stack's smallest node. (To lessen a possible increase in complexity in the final_arrangement function)
+
+1.  **size** : How many number of nodes in the stack. <br /> <br />
+2.  **top** : pointer (address) to the toppest node in the stack. <br /> <br />
+3.  **find_last_node** : pointer (address) to the bottom node in the stack. <br /> <br />
+4.  **the_smallest_node** : a pointer (address) to the stack's smallest node. (To lessen a possible increase in complexity in the final_arrangement function) <br /> <br />
 5.  **the_cheapest_node** : a pointer (address) to the stack's cheapest node. (Comparing each node to determine which one moves the least.)
+
+<br /> <br />
 
 ## Sorting Algorithms
 
-After handling user input error (empty string, string with space, duplicate number, input with many argument, input that is bigger than INT_MAX, input smaller than INT_MIN, etc), then push every element in stack A. I will classify the method to solve by the number of elements in stack A.
+After handling user input error (empty string, string with space, duplicate number, input with many argument, input that is bigger than INT_MAX, input smaller than INT_MIN, etc), then push every element in stack A. 
+<br /> <br />
+I will classify the method to solve by the number of elements in stack A.
 
 ```
 if (!stack_sorted(&a))  // if the stack has not been sorted.
@@ -117,6 +138,7 @@ if (!stack_sorted(&a))  // if the stack has not been sorted.
     push_swap(&a, &b);
 }
 ```
+<br /> <br />
 
 🅐  To solve the problem which size == 3, my project implements the following sorting algorithms:
 ```
@@ -134,6 +156,8 @@ void	tiny_sort_3(t_circularList *a)
 }
 ```
 I'll make sure that the largest node is at the bottom, then verify that the first two nodes are in the correct order before swapping. The maximum number of moves that can be made using this approach is 2.
+
+<br /> <br />
 
 🅑  To solve the problem which size == 5, my project implements the following sorting algorithms:
 
@@ -155,6 +179,7 @@ void	tiny_sort_5(t_circularList *a, t_circularList *b)
 ```
 I'll pick the smallest node in stack A and push to stack B. I'll do this process for 2 times so, the smallest will be at the bottom of stack B. Then, I'll do tiny_sort_3 to stack A. Then push back 2 element in stack B in order.
 
+<br /> <br />
 
  🅒  To solve the problem which size > 3, my project implements the following sorting algorithms:
  
@@ -163,6 +188,8 @@ This modified version is inspired by the [Turk Sort article](https://medium.com/
 
 This algorithm has the reference from **Mechanical Turk** which is hard coded and but efficiet.
 The main algoritm is implemented as follow :
+
+<br />
 
 ```
 void	push_swap(t_circularList *a, t_circularList *b)
@@ -191,27 +218,34 @@ void	push_swap(t_circularList *a, t_circularList *b)
 	final_arrangement(a);
 }
 ```
+<br /> 
+
 ❶ Push 2 nodes into stack B
+
+<br />
 
 ❷  Push nodes into stack B based on its cost until stack size == 3.
 
-    First, I'll set the target node for every node in stack A. The condition is the target node must be smaller than node a and it must be the clostest smallest one. 
-    
-    Second, calculate the price (how many moves both node A and target node to get the the toppest node). Compare all node in stack A then, keep the address of the chaepest node in a->the_cheapest_node
-    
-    Third, do the rotation to make node_a and its target_node_b to be at the top. If the node index <= median, then do ra(a). If not, then do rra(a). 
-    Forth, do pb(a, b) (move node_a to stack B)
+&nbsp;First, I'll set the target node for every node in stack A. The condition is the target node must be smaller than node a and it must be the clostest smallest one. <br /> <br />
+&nbsp;Second, calculate the price (how many moves both node A and target node to get the the toppest node). Compare all node in stack A then, keep the address of the chaepest node in a->the_cheapest_node <br /> <br />
+&nbsp;Third, do the rotation to make node_a and its target_node_b to be at the top. If the node index <= median, then do ra(a). If not, then do rra(a). <br /> <br />
+&nbsp;Forth, do pb(a, b) (move node_a to stack B)
 
-❸ Sort last three elements
+<br />
+
+❸ Sort last three elements 
+
+<br />
 
 ❹ Push all nodes back to stack A
 	
-   This time I'll set the target node for every node in stack B. The condition is the target_node_a must be bigger than node_b and it must be the clostest bigger one. 
+   This time I'll set the target node for every node in stack B. The condition is the target_node_a must be bigger than node_b and it must be the clostest bigger one. <br />
  
-    Second, do the rotation to make node_b and its target_node_a to be at the top. If the node index <= median, then do rb(b). If not, then do rrb(b).
+   Second, do the rotation to make node_b and its target_node_a to be at the top. If the node index <= median, then do rb(b). If not, then do rrb(b). <br />
   
-    Third, do pa(a, b) (move node_b to stack A)
+   Third, do pa(a, b) (move node_b to stack A)
 
+<br /> <br />
 
 ## Installation
 
@@ -219,8 +253,19 @@ To use the Push Swap project, follow these steps:
 
 1. Clone the repository to your local machine:
 
-   ```bash
+```
    git clone https://github.com/paphachanok/push_swap.git
-  ```
+```
 
+2. To complie all files in the directory
+
+```
+   make
+```
+
+3. To Run the program
+
+```
+   ./push_swap [ numbers you'd like to sort]
+```
 
